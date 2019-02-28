@@ -64,8 +64,8 @@ public class Tasks {
         this.project = project;;
     }
 
-    public void setTaskStatus (String taskstatus){
-        this.taskStatus = taskStatus;
+    public void setTaskStatus (){
+        this.taskStatus = "In Progress";
     }
 
 }
