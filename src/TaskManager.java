@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
+
 import java.io.InputStreamReader;
 
 public class TaskManager extends Tasks {
@@ -14,7 +15,9 @@ public class TaskManager extends Tasks {
 
     public TaskManager() throws IOException, ClassNotFoundException {
         input = new BufferedReader(new InputStreamReader(System.in));
-        Scanner sc = new Scanner(System.in);
+        this.taskList = new ArrayList<>();
+        //Tasks tasks = new Tasks();
+
     }
 
     public static void welcome() {
@@ -25,6 +28,7 @@ public class TaskManager extends Tasks {
         System.out.println("      2. Add New Task");
         System.out.println("      3. Edit Task(Update, Mark as done, Remove)");
         System.out.println("      4. Save and Quit");
+
     }
 
     private String userInput() {
@@ -48,23 +52,18 @@ public class TaskManager extends Tasks {
         return -1;
     }
 
-    public void process(int choice) {
-        choice = sc.nextInt();
+    public void process(int choice) throws IOException{
+        Scanner sc = new Scanner(System.in);
+        //choice = sc.nextInt();
             switch (choice) {
             case 1:
                 System.out.println("Task List");
-                System.out.print("Press 'Y' if you wants to go back to Menu:");
-                String go = sc.next();
-                go = go.toUpperCase();
-                welcome();
-                //while (option) {
-                //taskManager.userInput();
-                //}
                 break;
 
             case 2:
                 System.out.println("Add a Task");
                 addTasks();
+
                 break;
 
             case 3:
@@ -78,15 +77,32 @@ public class TaskManager extends Tasks {
             default:
                 System.out.println("Invalid choice");
                 welcome();
+                System.out.print("Select Option: ");
+                userInput();
+                choice = getUserOption();
+
+                process(choice);
                 break;
-
         }
+
+        System.out.print("Press 'Y' if you wants to go back to Menu:");
+        String go = sc.next();
+        go = go.toUpperCase();
+
+
+        welcome();
+        System.out.print("Select Option: ");
+        userInput();
+        choice = getUserOption();
+        process(choice);
+
+
     }
 
-    public void addNewTask(String title, String project, Date dueDate, String taskStatus) {
-        Tasks task = new Tasks(getNewTaskId(), title, project, dueDate, taskStatus);
-        Tasks.getTasks().add(task);
-    }
+    //public void addNewTask(String title, String project, Date dueDate, String taskStatus) {
+      // Tasks task = new Tasks(getTaskId(), title, project, dueDate, taskStatus);
+        //Tasks.add(task);
+    //}
 
     public  void addTasks() {
         Tasks tasks = new Tasks();
@@ -107,6 +123,8 @@ public class TaskManager extends Tasks {
 
         taskList.add(tasks);
 
+        System.out.println("Task is added successfully");
+
         for(Tasks task: taskList)
             System.out.println(task.getTaskId() + " " + task.getTitle() + " " + task.getProject() + " " + task.getDueDate() + " " +
                     task.getTaskStatus());
@@ -114,6 +132,8 @@ public class TaskManager extends Tasks {
         System.out.print("Enter Another Record? (Y/N)");
         String word = in.next();
         word = word.toUpperCase();
+        addTasks();
+
 
     }
 
@@ -139,6 +159,16 @@ public class TaskManager extends Tasks {
         }
         return null;
     }
+
+    public void printList(){
+        System.out.println("**************************************** To Do List ****************************************");
+
+        for(Tasks task: taskList)
+            System.out.println(task.getTaskId() + " " + task.getTitle() + " " + task.getDueDate() + " " + task.getProject() + " " +
+                    task.getTaskStatus());
+
+    }
+
 
 
 

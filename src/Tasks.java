@@ -22,8 +22,17 @@ public class Tasks {
 
     private int indexId = 1;
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Scanner sc = new Scanner(System.in);
+/*
+    public Tasks(int taskId, String title, Date dueDate, String project, String taskStatus){
+
+        this.taskId = taskId;
+        this.title = title;
+        this.dueDate = dueDate;
+        this.project = project;
+        this.taskStatus = taskStatus;
+
+    }
+*/
 
 
     public int getTaskId() {
