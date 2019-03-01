@@ -58,11 +58,47 @@ public class TaskManager extends Tasks {
             switch (choice) {
             case 1:
                 System.out.println("Task List");
+
+                System.out.print("Press 'Y' if you wants to go back to Menu:");
+                String go = sc.next();
+                go = go.toUpperCase();
+
+                if (go.equalsIgnoreCase("Y")) {
+
+                    welcome();
+                    System.out.print("Select Option: ");
+                    choice = getUserOption();
+                    process(choice);
+                }
+                else {
+                    System.exit(0);
+                }
+
                 break;
 
             case 2:
                 System.out.println("Add a Task");
                 addTasks();
+
+                    System.out.print("Enter Another Record (Y)/Go to Menu(M)/Exit(N): ");
+
+                    String word = sc.next();
+
+                    word = word.toUpperCase();
+                    if (word.equalsIgnoreCase("Y")) {
+                        addTasks();
+                    }
+
+                else if (word.equalsIgnoreCase("M")) {
+
+                    welcome();
+                    System.out.print("Select Option: ");
+                    choice = getUserOption();
+                    process(choice);
+                }
+                else {
+                    System.exit(0);
+                }
 
                 break;
 
@@ -78,40 +114,23 @@ public class TaskManager extends Tasks {
                 System.out.println("Invalid choice");
                 welcome();
                 System.out.print("Select Option: ");
-                userInput();
                 choice = getUserOption();
-
                 process(choice);
+
                 break;
         }
-
-        System.out.print("Press 'Y' if you wants to go back to Menu:");
-        String go = sc.next();
-        go = go.toUpperCase();
-
-
-        welcome();
-        System.out.print("Select Option: ");
-        userInput();
-        choice = getUserOption();
-        process(choice);
 
 
     }
 
-    //public void addNewTask(String title, String project, Date dueDate, String taskStatus) {
-      // Tasks task = new Tasks(getTaskId(), title, project, dueDate, taskStatus);
-        //Tasks.add(task);
-    //}
-
     public  void addTasks() {
         Tasks tasks = new Tasks();
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter Task Title:");
+        System.out.print("Enter Task Title: ");
         String title = in.next();
-        System.out.print("Enter Project Name:");
+        System.out.print("Enter Project Name: ");
         String project = in.next();
-        System.out.print("Enter Due date(yyyy-MM-dd):");
+        System.out.print("Enter Due date(yyyy-MM-dd): ");
         Date dueDate = verifyDueDateFormat();
 
         tasks.setTaskId();
@@ -123,18 +142,11 @@ public class TaskManager extends Tasks {
 
         taskList.add(tasks);
 
-        System.out.println("Task is added successfully");
+        System.out.println("Task is added successfully.");
 
         for(Tasks task: taskList)
             System.out.println(task.getTaskId() + " " + task.getTitle() + " " + task.getProject() + " " + task.getDueDate() + " " +
                     task.getTaskStatus());
-
-        System.out.print("Enter Another Record? (Y/N)");
-        String word = in.next();
-        word = word.toUpperCase();
-        addTasks();
-
-
     }
 
 
