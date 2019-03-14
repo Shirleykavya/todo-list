@@ -1,9 +1,8 @@
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.*;
-import java.text.*;
+package todo.tasks;
 
-public class Tasks {
+import java.util.Date;
+
+public class Tasks implements Comparable<Tasks> {
 
     // The task id
     private int taskId;
@@ -18,25 +17,19 @@ public class Tasks {
     private String project;
 
     // To check the Status of the task.
-    private String taskStatus;
+    private String status;
 
-    private int indexId = 1;
 
-/*
-    public Tasks(int taskId, String title, Date dueDate, String project, String taskStatus){
+    public Tasks(int taskId, String title, String project, Date dueDate, String status){
 
         this.taskId = taskId;
         this.title = title;
-        this.dueDate = dueDate;
         this.project = project;
-        this.taskStatus = taskStatus;
-
+        this.dueDate = dueDate;
+        this.status = status;
     }
-*/
-
 
     public int getTaskId() {
-
         return taskId;
     }
 
@@ -52,14 +45,13 @@ public class Tasks {
         return project;
     }
 
-    public String getTaskStatus() {
-
-        return taskStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTaskId() {
-        this.taskId = indexId++;
-    }
+	 public void setTaskId() {
+	       this.taskId = taskId;
+	   }
 
     public void setTitle(String title) {
         this.title = title;
@@ -70,11 +62,25 @@ public class Tasks {
     }
 
     public void setProject(String project) {
-        this.project = project;;
+        this.project = project;
     }
 
-    public void setTaskStatus (){
-        this.taskStatus = "In Progress";
+    public void setStatus (String status){
+        this.status = status;
     }
+
+    public String getDetails() {
+        return taskId + "## " + title + "## " + dueDate + "##" + project + "## " + status;
+    }
+
+    @Override
+    public int compareTo(Tasks t) {
+        if (getDueDate() == null || t.getDueDate() == null) {
+            return 0;
+        }
+        return getDueDate().compareTo(t.getDueDate());
+    }
+
+
 
 }
