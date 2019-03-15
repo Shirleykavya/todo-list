@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 public class TaskStorage implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     private ArrayList<Tasks>tasks;
-    private int id;
 
     public TaskStorage() {
-        tasks = new ArrayList<>();
-        id = 0;
+
     }
 
     public ArrayList<Tasks> getTasks() {
@@ -19,14 +22,4 @@ public class TaskStorage implements Serializable {
     public void setTasks(ArrayList<Tasks> tasks) {
         this.tasks = tasks;
     }
-
-    public int getId(){
-        return id++;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }
-
-
 }

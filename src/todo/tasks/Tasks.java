@@ -1,8 +1,13 @@
+/**
+ * This class represents a single task in ToDoApp.
+ */
+
 package todo.tasks;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Tasks implements Comparable<Tasks> {
+public class Tasks implements Serializable, Comparable<Tasks> {
 
     // The task id
     private int taskId;
@@ -17,10 +22,10 @@ public class Tasks implements Comparable<Tasks> {
     private String project;
 
     // To check the Status of the task.
-    private String status;
+    private boolean status;
 
 
-    public Tasks(int taskId, String title, String project, Date dueDate, String status){
+    public Tasks(int taskId, String title, String project, Date dueDate, boolean status){
 
         this.taskId = taskId;
         this.title = title;
@@ -45,13 +50,13 @@ public class Tasks implements Comparable<Tasks> {
         return project;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-	 public void setTaskId() {
-	       this.taskId = taskId;
-	   }
+    public void setTaskId() {
+        this.taskId = taskId;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -65,7 +70,7 @@ public class Tasks implements Comparable<Tasks> {
         this.project = project;
     }
 
-    public void setStatus (String status){
+    public void setStatus (boolean status){
         this.status = status;
     }
 
@@ -73,6 +78,12 @@ public class Tasks implements Comparable<Tasks> {
         return taskId + "## " + title + "## " + dueDate + "##" + project + "## " + status;
     }
 
+    /**
+     * Compare tasks according to the due dates.
+     *
+     * @param t Tasks object
+     * @return an integer value for comparison
+     */
     @Override
     public int compareTo(Tasks t) {
         if (getDueDate() == null || t.getDueDate() == null) {
@@ -81,6 +92,5 @@ public class Tasks implements Comparable<Tasks> {
         return getDueDate().compareTo(t.getDueDate());
     }
 
-
-
 }
+

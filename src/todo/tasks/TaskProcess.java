@@ -1,3 +1,8 @@
+/**
+ * This is the main controller class of ToDoApp.
+ * It shows output to the user according to his selection.
+ */
+
 package todo.tasks;
 
 import todo.storage.FileReader;
@@ -11,24 +16,33 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class TaskProcess {
 
     private BufferedReader input;
-    private TaskStorage taskStorage;
+    private ArrayList<Tasks> taskList;
     private FileReader filereader;
     Scanner sc = new Scanner(System.in);
     int max_attempt = 2;
+    TaskStorage taskStorage;
 
     public TaskProcess() throws IOException {
         input = new BufferedReader(new InputStreamReader(System.in) );
         filereader = new FileReader();
         taskStorage = filereader.readFile();
+        taskList = new ArrayList<>();
+        if(taskStorage!=null && taskStorage.getTasks()!=null)
+            taskList = taskStorage.getTasks();
     }
 
     public ArrayList<Tasks> getTasks() {
-        return taskStorage.getTasks();
+        return taskList;
+    }
+
+    public void addto(Tasks task) {
+        taskList.add(task);
     }
 
     public void addNewTask() throws IOException {
@@ -38,18 +52,22 @@ public class TaskProcess {
         String project = sc.next();
         System.out.print("Enter Due date(dd-MM-yyyy): ");
         Date dueDate = verifyDueDateFormat();
-        String status = "In Progress";
 
-        Tasks tasks = new Tasks(getNewId(), title, project, dueDate, status);
-        taskStorage.getTasks().add(tasks);
-
-        for(Tasks task: taskStorage.getTasks())
-            System.out.println(getNewId() + "##" + task.getTitle() + "##" + task.getProject() +
-                    "##" + task.getDueDate() + "##" + task.getStatus());
+        Tasks newTask = new Tasks(taskList.size()+1, title, project, dueDate, false);
+        taskList.add(newTask);
+        showTaskList();
     }
 
-    public int getNewId() {
-        return taskStorage.getId();
+    public void showTaskList() {
+        for(Tasks task: taskList) {
+            String status="";
+            if(task.getStatus())
+                status = "Done";
+            else
+                status = "To Do";
+            System.out.println(task.getTaskId() + "##" + task.getTitle() + "##" + task.getProject() +
+                    "##" + task.getDueDate() + "##" + status);
+        }
     }
 
     public Date verifyDueDateFormat() throws IOException {
@@ -82,20 +100,34 @@ public class TaskProcess {
     }
 
     public void saveToFile()throws IOException {
+        taskStorage = new TaskStorage();
+        taskStorage.setTasks(taskList);
         filereader.saveTask(taskStorage);
     }
 
-    public List<Tasks> tasksByProject(final String project) {
-        return taskStorage.getTasks().stream().filter(tasks -> project.equals(tasks.getProject())).collect(Collectors.toList());
-
+    public void tasksByProject() {
+        Collections.sort(taskList, new SortByProject());
+        showTaskList();
+        // for(Tasks task: taskList)
+        //  System.out.println(task.getTaskId() + "##" + task.getTitle() + "##" + task.getProject() +
+        //     "##" + task.getDueDate() + "##" + task.getStatus());
     }
 
-    public List<Tasks> tasksByDate() {
-        Collections.sort(taskStorage.getTasks());
-        for(Tasks task: tasksByDate())
-            System.out.println(task.getTaskId() + "##" + task.getTitle() + "##" + task.getProject() +
-                    "##" + task.getDueDate() + "##" + task.getStatus());
-        return taskStorage.getTasks();
+    class SortByProject implements Comparator<Tasks>{
+        public int compare(Tasks task1, Tasks task2){
+            return task1.getProject().compareTo(task2.getProject());
+        }
+    }
+
+    class SortByDate implements Comparator<Tasks>{
+        public int compare(Tasks task1, Tasks task2){
+            return task1.getDueDate().compareTo(task2.getDueDate());
+        }
+    }
+
+    public void tasksByDate() {
+        Collections.sort(taskList,new SortByDate());
+        showTaskList();
     }
 
     public int getUserOption() throws IOException {
@@ -107,58 +139,20 @@ public class TaskProcess {
         return -1;
     }
 
-    public int verifyId() throws IOException {
-        boolean found = false;
-        int count = 1;
-        int id;
-        while (count <= max_attempt) {
-            taskStorage.getTasks();
-            System.out.print("Enter Task(id) for update: ");
-            id = getUserOption();
-            for (Tasks tasks : taskStorage.getTasks()) {
-                if (id == tasks.getTaskId()) {
-                    return id;
-                }
-            }
-            if (found == false) {
-                System.out.println("Invalid Task Id.");
-                count++;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Returns the task corresponding to the given id
-     *
-     * @param id the id of task to be returned
-     * @return task if present in the list otherwise return null
-     */
-    public Tasks getTaskById(int id) {
-        ArrayList<Tasks> tasks = getTasks();
-        for (Tasks task : tasks) {
-            if (id == task.getTaskId()) {
-                return task;
-            }
-        }
-        return null;
-    }
-
     /**
      * Update the title of the task with the given id
      *
      * @param id    the id of the task to be updated with new title
      * @param title the new value of title
-     * @return true if found the task with the id otherwise returns false
      */
-    public boolean updateTaskTitle(int id, String title) {
-        Tasks task = getTaskById(id);
-        if (task != null) {
-            task.setTitle(title);
-            return true;
-        } else {
-            return false;
+    public void updateTaskTitle(int id, String title) {
+        if(taskList.size()>=id) {
+            for(int i=0; i<taskList.size();i++) {
+                if(taskList.get(i).getTaskId() == id)
+                    taskList.get(i).setTitle(title);
+            }
         }
+        updatePrintList();
     }
 
     /**
@@ -166,16 +160,16 @@ public class TaskProcess {
      *
      * @param id      the id of the task to be updated with new project name
      * @param project the new value of project name
-     * @return true if found the task with the id otherwise returns false
      */
-    public boolean updateTaskProject(int id, String project) {
-        Tasks task = getTaskById(id);
-        if (task != null) {
-            task.setProject(project);
-            return true;
-        } else {
-            return false;
+    public void updateTaskProject(int id, String project) {
+        if(taskList.size()>=id) {
+            for(int i=0; i<taskList.size();i++) {
+                if(taskList.get(i).getTaskId() == id)
+                    taskList.get(i).setProject(project);
+            }
         }
+        showTaskList();
+        updatePrintList();
     }
 
     /**
@@ -183,45 +177,19 @@ public class TaskProcess {
      *
      * @param id      the id of the task to be updated with new due date
      * @param dueDate the new value of due date
-     * @return true if found the task with the id otherwise returns false
      */
-    public boolean updateTaskDueDate(int id, Date dueDate) {
-        Tasks task = getTaskById(id);
-        if (task != null) {
-            task.setDueDate(dueDate);
-            return true;
-        } else {
-            return false;
+    public void updateTaskDueDate(int id, Date dueDate) {
+        if(taskList.size()>=id) {
+            for(int i=0; i<taskList.size();i++) {
+                if(taskList.get(i).getTaskId() == id)
+                    taskList.get(i).setDueDate(dueDate);
+            }
         }
+        updatePrintList();
     }
 
-    /**
-     * Update the status of the task with the given id
-     *
-     * @param id      the id of the task to be updated with new status
-     * @param status the new value of status
-     * @return true if found the task with the id otherwise returns false
-     */
-
-    public boolean updateTaskDueDate(int id, String status) {
-        Tasks task = getTaskById(id);
-        if (task != null) {
-            task.setStatus(status);
-            return true;
-        } else {
-            return false;
-        }
+    public void updatePrintList() {
+        System.out.println("The Updated new Task List is");
+        showTaskList();
     }
-
-    /**
-     * Remove the task corresponding to the selected id
-     *
-     * @param id of task to be removed
-     */
-    public void removeTask(int id) {
-        Tasks task = getTaskById(id);
-        getTasks().remove(task);
-    }
-
-
 }
