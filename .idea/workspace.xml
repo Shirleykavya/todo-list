@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a1a78d51-3995-488f-bd77-248fe8ff9c42" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/todo/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/todo/TaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/todo/tasks/TaskProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/todo/tasks/TaskProcess.java" afterDir="false" />
     </list>
@@ -56,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/todo/TaskManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
+            <state relative-caret-position="326">
+              <caret line="157" column="68" selection-start-line="157" selection-start-column="68" selection-end-line="157" selection-end-column="68" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -88,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/todo/tasks/TaskProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="132" column="56" lean-forward="true" selection-start-line="132" selection-start-column="56" selection-end-line="132" selection-end-column="56" />
+            <state relative-caret-position="115">
+              <caret line="206" column="23" lean-forward="true" selection-start-line="206" selection-start-column="23" selection-end-line="206" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -99,8 +100,8 @@
                 <element signature="e#1106#1107#0" expanded="true" />
                 <element signature="e#4545#4546#0" expanded="true" />
                 <element signature="e#4624#4625#0" expanded="true" />
-                <element signature="e#4736#4737#0" expanded="true" />
-                <element signature="e#4815#4816#0" expanded="true" />
+                <element signature="e#4713#4714#0" expanded="true" />
+                <element signature="e#4792#4793#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -202,31 +203,6 @@
               <item name="Todo_list" type="462c0819:PsiDirectoryNode" />
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Todo_list" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Todo_list" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Todo_list" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Todo_list" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="todo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Todo_list" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Todo_list" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="todo" type="462c0819:PsiDirectoryNode" />
-              <item name="storage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Todo_list" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Todo_list" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="todo" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -234,7 +210,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552648349911" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552652642804" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -505,8 +481,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/todo/TaskManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
+        <state relative-caret-position="326">
+          <caret line="157" column="68" selection-start-line="157" selection-start-column="68" selection-end-line="157" selection-end-column="68" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -518,8 +494,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/todo/tasks/TaskProcess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="132" column="56" lean-forward="true" selection-start-line="132" selection-start-column="56" selection-end-line="132" selection-end-column="56" />
+        <state relative-caret-position="115">
+          <caret line="206" column="23" lean-forward="true" selection-start-line="206" selection-start-column="23" selection-end-line="206" selection-end-column="23" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -529,8 +505,8 @@
             <element signature="e#1106#1107#0" expanded="true" />
             <element signature="e#4545#4546#0" expanded="true" />
             <element signature="e#4624#4625#0" expanded="true" />
-            <element signature="e#4736#4737#0" expanded="true" />
-            <element signature="e#4815#4816#0" expanded="true" />
+            <element signature="e#4713#4714#0" expanded="true" />
+            <element signature="e#4792#4793#0" expanded="true" />
           </folding>
         </state>
       </provider>

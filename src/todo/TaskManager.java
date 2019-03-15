@@ -156,8 +156,6 @@ public class TaskManager {
                 break;
             case 2:
                 System.out.println("Task List Filtered by Project");
-                System.out.println("what project do you want to filter?");
-                String projectName = sc.next();
                 taskProcess.tasksByProject();
                 break;
             default:

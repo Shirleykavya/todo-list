@@ -133,7 +133,8 @@ public class TaskProcess {
         Collections.sort(taskList, new SortByProject());
         showTaskList();
       /*
-      String project;
+         System.out.println("what project do you want to filter?");
+         String projectName = sc.next();
 
         List<Tasks> filtered = taskList.stream().filter(task -> task.getProject().equals(project)).collect(Collectors.toList());
 
