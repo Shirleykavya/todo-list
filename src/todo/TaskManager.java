@@ -1,15 +1,10 @@
 /**
  * Accept & parse input from the user.
  */
-
-
 package todo;
 
 import todo.tasks.TaskProcess;
-import todo.tasks.Tasks;
-import todo.tasks.TaskStorage;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Date;
 
@@ -22,6 +17,9 @@ public class TaskManager {
         taskProcess = new TaskProcess();
     }
 
+    /**
+     * Displays the Menu Menu.
+     */
     public void welcome() {
         System.out.println("Welcome to TO DO List \n");
         System.out.println("Main Menu: \n");
@@ -32,6 +30,13 @@ public class TaskManager {
         System.out.println("5. Quit");
     }
 
+
+    /**
+     * According to the user's chosenTask input, the function manipulates the corresponding functionality
+     *
+     * The number should be entered by the user for a particular functionality
+     * @throws IOException
+     */
     public void process() throws IOException {
         int choice;
         System.out.print("Select Option: ");
@@ -85,6 +90,9 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Add a task, accepts input from user for a task like title, project, due date.
+     */
     public void addTask() throws IOException {
         taskProcess.addNewTask();
         nextTask();
@@ -109,6 +117,10 @@ public class TaskManager {
         System.exit(0);
     }
 
+    /**
+     * Display the tasklist. This displays the task list and option to view list
+     * ordered by date or filtered by project
+     */
     public void taskList() throws IOException {
         taskProcess.showTaskList();
         if (taskProcess.getTasks().size() > 0) {
@@ -165,6 +177,9 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Edit the task. This may involve updating, marking it as done or removing
+     */
     public void editList() throws IOException {
         int choice;
         taskProcess.showTaskList();
@@ -207,6 +222,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Update the task's field corresponding to the id
+     *
+     * @param id the id of task to be updated
+     */
     public void updateTask(int id) throws IOException{
 
         System.out.println("1. Update Title");
@@ -254,6 +274,11 @@ public class TaskManager {
         editNextTask();
     }
 
+    /**
+     * Remove the task corresponding to the selected id
+     *
+     * @param id of task to be removed
+     */
     private void removeTask(int id) throws IOException {
         if(taskProcess.getTasks().size()>=id)
             for(int i=0;i<taskProcess.getTasks().size();i++)

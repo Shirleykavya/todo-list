@@ -1,3 +1,7 @@
+/**
+ * This class represents to store tasklist in a file and to read a file
+ */
+
 package todo.storage;
 
 import todo.tasks.TaskStorage;
@@ -9,6 +13,12 @@ import java.io.ObjectOutputStream;
 
 public class FileReader {
 
+    /**
+     * Save task list to the file
+     *
+     * @param taskStore the list of tasks
+     * @throws IOException
+     */
     private final static String path = "Taskfile.txt";
     //public TaskStorage taskstorage;
 
@@ -24,6 +34,11 @@ public class FileReader {
         }
     }
 
+    /**
+     * Retrieve data from file
+     *
+     * @return the list of file
+     */
     public TaskStorage readFile() throws IOException{
 
         try {

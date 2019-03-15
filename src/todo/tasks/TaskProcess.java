@@ -13,8 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -45,6 +43,13 @@ public class TaskProcess {
         taskList.add(task);
     }
 
+    public int countTasks(boolean status) {
+        return Long.valueOf(taskList.stream().filter(task -> task.getStatus() == status).count()).intValue();
+    }
+
+    /**
+     * Add a task, accepts input from user for a task like title, project, due date.
+     */
     public void addNewTask() throws IOException {
         System.out.print("Enter Task Title: ");
         String title = sc.next();
@@ -70,6 +75,12 @@ public class TaskProcess {
         }
     }
 
+    /**
+     * Verifies the date format
+     * Gives user a maximum of two attempts if he enters wrong input
+     *
+     * @return date in correct format otherwise returns null value
+     */
     public Date verifyDueDateFormat() throws IOException {
         Date newDate = null;
         int count = 1;
@@ -105,18 +116,25 @@ public class TaskProcess {
         filereader.saveTask(taskStorage);
     }
 
-    public void tasksByProject() {
-        Collections.sort(taskList, new SortByProject());
-        showTaskList();
-        // for(Tasks task: taskList)
-        //  System.out.println(task.getTaskId() + "##" + task.getTitle() + "##" + task.getProject() +
-        //     "##" + task.getDueDate() + "##" + task.getStatus());
-    }
 
     class SortByProject implements Comparator<Tasks>{
         public int compare(Tasks task1, Tasks task2){
             return task1.getProject().compareTo(task2.getProject());
         }
+    }
+
+    /**
+     * Filter tasks based on project name
+     * @return list of tasks of the project
+     */
+    public void tasksByProject() {
+        Collections.sort(taskList, new SortByProject());
+        showTaskList();
+      /*  for(Tasks task: taskList) {
+            if(project.equals(task.getProject())) {
+                System.out.println(task.getDetails());
+            }
+       }*/
     }
 
     class SortByDate implements Comparator<Tasks>{
@@ -125,6 +143,11 @@ public class TaskProcess {
         }
     }
 
+    /**
+     * Shows all the tasks sorted by date
+     *
+     * @return list of tasks sorted by date
+     */
     public void tasksByDate() {
         Collections.sort(taskList,new SortByDate());
         showTaskList();
@@ -188,6 +211,9 @@ public class TaskProcess {
         updatePrintList();
     }
 
+    /**
+     * Display the Updated the list
+     */
     public void updatePrintList() {
         System.out.println("The Updated new Task List is");
         showTaskList();
