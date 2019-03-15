@@ -156,6 +156,8 @@ public class TaskManager {
                 break;
             case 2:
                 System.out.println("Task List Filtered by Project");
+                System.out.println("what project do you want to filter?");
+                String projectName = sc.next();
                 taskProcess.tasksByProject();
                 break;
             default:
@@ -188,7 +190,7 @@ public class TaskManager {
             int id = sc.nextInt();
             if (id != -1 && taskProcess.getTasks().size()>=id) {
                 System.out.println("1. Update Task");
-                System.out.println("2. Mark as done");
+                System.out.println("2. Update Status Mark as done");
                 System.out.println("3. Remove Task");
                 System.out.print("Select Option: ");
                 choice = sc.nextInt();

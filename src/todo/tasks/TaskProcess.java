@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class TaskProcess {
@@ -130,11 +132,21 @@ public class TaskProcess {
     public void tasksByProject() {
         Collections.sort(taskList, new SortByProject());
         showTaskList();
-      /*  for(Tasks task: taskList) {
-            if(project.equals(task.getProject())) {
-                System.out.println(task.getDetails());
-            }
-       }*/
+      /*
+      String project;
+
+        List<Tasks> filtered = taskList.stream().filter(task -> task.getProject().equals(project)).collect(Collectors.toList());
+
+        if (filtered.size() == 0)
+        {
+            System.out.println("this project doen't exist");
+            return;
+        }
+
+        for(Tasks t : filtered){
+            System.out.println(t);
+
+        }*/
     }
 
     class SortByDate implements Comparator<Tasks>{
