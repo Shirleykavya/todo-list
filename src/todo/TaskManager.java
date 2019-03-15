@@ -156,7 +156,9 @@ public class TaskManager {
                 break;
             case 2:
                 System.out.println("Task List Filtered by Project");
-                taskProcess.tasksByProject();
+                System.out.println("What project do you want to filter?");
+                String project = sc.next();
+                taskProcess.tasksByProject(project);
                 break;
             default:
                 System.out.println("Please provide correct value!");
@@ -283,7 +285,7 @@ public class TaskManager {
         if(taskProcess.getTasks().size()>=id)
             for(int i=0;i<taskProcess.getTasks().size();i++)
                 if(taskProcess.getTasks().get(i).getTaskId() == id)
-                    taskProcess.getTasks().remove(id);
+                    taskProcess.getTasks().remove(i);
         System.out.println("Task removed!!!");
         System.out.println("Now The Task List is:");
         taskProcess.showTaskList();

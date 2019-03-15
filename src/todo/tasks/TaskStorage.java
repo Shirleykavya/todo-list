@@ -2,7 +2,6 @@
  * Represents the object for storage in file with unique Id generation for each object.
  */
 
-
 package todo.tasks;
 import java.util.ArrayList;
 import java.io.Serializable;

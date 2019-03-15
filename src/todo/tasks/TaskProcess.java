@@ -15,8 +15,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 public class TaskProcess {
@@ -118,36 +117,22 @@ public class TaskProcess {
         filereader.saveTask(taskStorage);
     }
 
-
-    class SortByProject implements Comparator<Tasks>{
-        public int compare(Tasks task1, Tasks task2){
-            return task1.getProject().compareTo(task2.getProject());
-        }
-    }
-
     /**
-     * Filter tasks based on project name
-     * @return list of tasks of the project
+     * Filter tasklist based on project name
+     * @return list of tasks filtered by project
      */
-    public void tasksByProject() {
-        Collections.sort(taskList, new SortByProject());
-        showTaskList();
-      /*
-         System.out.println("what project do you want to filter?");
-         String projectName = sc.next();
-
-        List<Tasks> filtered = taskList.stream().filter(task -> task.getProject().equals(project)).collect(Collectors.toList());
-
-        if (filtered.size() == 0)
-        {
-            System.out.println("this project doen't exist");
-            return;
+    public void tasksByProject(String project) {
+        boolean isProjectExist = false;
+        System.out.println("List of tasks filtered by Project '" + project + "' are: ");
+        for(int i=0; i<taskList.size();i++) {
+            if(taskList.get(i).getProject().equalsIgnoreCase(project)) {
+                System.out.println(taskList.get(i).getDetails());
+                isProjectExist = true;
+            }
         }
-
-        for(Tasks t : filtered){
-            System.out.println(t);
-
-        }*/
+        if(!isProjectExist) {
+            System.out.println("Project '" + project + "' does not exist in the list\"");
+        }
     }
 
     class SortByDate implements Comparator<Tasks>{
@@ -204,7 +189,6 @@ public class TaskProcess {
                     taskList.get(i).setProject(project);
             }
         }
-        showTaskList();
         updatePrintList();
     }
 
